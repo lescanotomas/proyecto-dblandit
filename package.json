@@ -1,0 +1,29 @@
+{
+  "name": "proyecto-dblandit",
+  "version": "1.0.0",
+  "description": "REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:uncleremu5/proyecto-dblandit.git"
+  },
+  "author": "tomas lescano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uncleremu5/proyecto-dblandit/issues"
+  },
+  "homepage": "https://github.com/uncleremu5/proyecto-dblandit#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.8",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
