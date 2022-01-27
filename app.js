@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 
 const alumnoRoutes = require('./api/routes/alumnos');
 const cursosRoutes = require('./api/routes/cursos');
+const usersRoutes = require('./api/routes/users');
+
 
 mongoose.connect('mongodb+srv://rest-api-empresa:asdasdasd@rest-api-empresa.q98zl.mongodb.net/empresa?retryWrites=true&w=majority');
 
@@ -26,6 +28,7 @@ app.use((req, res, next) => {
 
 app.use('/alumnos', alumnoRoutes);
 app.use('/cursos', cursosRoutes);
+app.use('/users', usersRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
