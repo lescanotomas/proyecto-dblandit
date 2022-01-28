@@ -45,6 +45,39 @@ router.post("/registro", (req, res, next) => {
     });
 });
 
+router.post('/login', (req, res, next) => {
+  User.find({ email: req.body.email})
+    .exec()
+    .then(user => {
+        if(user.length < 1) {
+          return res.status(401).json({
+            message: 'No se pudo autenticar'
+          });
+        }
+        bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+          if (err) {
+            return res.status(401).json({
+              message: 'No se pudo autenticar'
+            });
+          }
+          if (result) {
+             return res.status(200).json({
+               message: 'Autenticado'
+             });
+          }
+          res.status(401).json({
+            message: 'No se pudo autenticar'
+          });
+        });
+    })
+    .catch(err => {
+     console.log(err);
+     res.status(500).json({
+      error: err
+     });
+   });
+});
+
 router.delete("/:usuarioId", (req, res, next) => {
   User.deleteOne({ _id: req.params.usuarioId })
     .exec()
