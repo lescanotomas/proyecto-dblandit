@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const checkAuth = require('../middleware/check-auth');
 
 const Alumno = require('../models/alumno');
 
@@ -30,7 +31,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAuth, (req, res, next) => {
     const alumno = new Alumno({
         _id: new mongoose.Types.ObjectId(),
         nombre: req.body.nombre,
@@ -96,7 +97,7 @@ router.get('/:alumnoId', (req, res, next) => {
 */
 
 //Update de un alumno en especifico
-router.patch('/:alumnoId', (req, res, next) => {
+router.patch('/:alumnoId', checkAuth, (req, res, next) => {
     const id = req.params.alumnoId;
     Alumno.updateOne({ _id: id }, { $set: { nombre: req.body.nuevoNombre, apellido: req.body.nuevoApellido, dni: req.body.nuevoDni, direccion: req.body.nuevaDireccion } })
     .exec()
@@ -113,7 +114,7 @@ router.patch('/:alumnoId', (req, res, next) => {
 });
 
 //Eliminar un alumno en especifico por ID
-router.delete('/:alumnoId', (req, res, next) => {
+router.delete('/:alumnoId', checkAuth, (req, res, next) => {
     const id = req.params.alumnoId;
     Alumno.remove({ _id: id}).exec()
     .then(result => {
@@ -128,7 +129,7 @@ router.delete('/:alumnoId', (req, res, next) => {
 });
 
 /*ELIMINA A TODOS LOS ALUMNOS
-router.delete('/', (req, res, next) => {
+router.delete('/', checkAuth, (req, res, next) => {
     Alumno.deleteMany()
     .exec()
     .then(docs => {

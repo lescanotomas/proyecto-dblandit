@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const checkAuth = require('../middleware/check-auth');
+
 
 const Curso = require('../models/curso');
 
@@ -30,7 +32,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAuth, (req, res, next) => {
     const curso = new Curso({
         _id: new mongoose.Types.ObjectId(),
         tema: req.body.tema,
@@ -74,7 +76,7 @@ router.get('/:cursoId', (req, res, next) => {
     });
 });
 
-router.patch('/:cursoId', (req, res, next) => {
+router.patch('/:cursoId', checkAuth, (req, res, next) => {
     const id = req.params.cursoId;
     Curso.updateOne({ _id: id }, { $set: { tema: req.body.nuevoTema, anioDictado: req.body.nuevoAnioDictado, duracion: req.body.nuevaDuracion } })
     .exec()
@@ -91,7 +93,7 @@ router.patch('/:cursoId', (req, res, next) => {
 });
 
 
-router.delete('/:cursoId', (req, res, next) => {
+router.delete('/:cursoId', checkAuth, (req, res, next) => {
     const id = req.params.cursoId;
     Curso.remove({ _id: id}).exec()
     .then(result => {
