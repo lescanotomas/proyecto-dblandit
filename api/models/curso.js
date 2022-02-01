@@ -1,3 +1,5 @@
+//Se crea el modelo curso, para preparar a la base de datos con los datos que tiene que recibir
+
 const mongoose = require('mongoose');
 
 const cursoSchema = mongoose.Schema({

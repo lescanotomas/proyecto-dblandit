@@ -1,3 +1,5 @@
+//Se crea el modelo user, para preparar a la base de datos con los datos que tiene que recibir
+
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({

@@ -6,6 +6,8 @@ const checkAuth = require('../middleware/check-auth');
 
 const Curso = require('../models/curso');
 
+//GET a cursos, para poder listar todos los cursos
+
 router.get('/', (req, res, next) => {
     Curso.find()
     .select('tema anioDictado duracion _id')
@@ -32,6 +34,9 @@ router.get('/', (req, res, next) => {
     });
 });
 
+
+//POST a cursos, para poder listar todos los alumnos
+
 router.post('/', checkAuth, (req, res, next) => {
     const curso = new Curso({
         _id: new mongoose.Types.ObjectId(),
@@ -57,6 +62,8 @@ router.post('/', checkAuth, (req, res, next) => {
 
 });
 
+//GET a un curso en especifico buscando por ID
+
 router.get('/:cursoId', (req, res, next) => {
     const id = req.params.cursoId;
     Curso.findById(id)
@@ -76,6 +83,8 @@ router.get('/:cursoId', (req, res, next) => {
     });
 });
 
+//Actualizar a un curso en especifico por ID
+
 router.patch('/:cursoId', checkAuth, (req, res, next) => {
     const id = req.params.cursoId;
     Curso.updateOne({ _id: id }, { $set: { tema: req.body.nuevoTema, anioDictado: req.body.nuevoAnioDictado, duracion: req.body.nuevaDuracion } })
@@ -92,6 +101,8 @@ router.patch('/:cursoId', checkAuth, (req, res, next) => {
     });
 });
 
+
+//Eliminar a un curso en especifico por ID
 
 router.delete('/:cursoId', checkAuth, (req, res, next) => {
     const id = req.params.cursoId;

@@ -5,6 +5,8 @@ const checkAuth = require('../middleware/check-auth');
 
 const Alumno = require('../models/alumno');
 
+//GET a alumnos, lista todos los alumnos
+
 router.get('/', (req, res, next) => {
     Alumno.find()
     .select('nombre apellido dni direccion _id')
@@ -30,6 +32,8 @@ router.get('/', (req, res, next) => {
         });
     });
 });
+
+//POST a alumnos, para agregar un alumno
 
 router.post('/', checkAuth, (req, res, next) => {
     const alumno = new Alumno({
@@ -76,25 +80,6 @@ router.get('/:alumnoId', (req, res, next) => {
     });
 });
 
-
-/*router.get('/:alumnoDni', (req, res, next) => {
-    const dni = req.params.alumnoDni;
-    Alumno.find(dni)
-    .exec()
-    .then(doc => {
-        console.log("buscando por dni desde la base de datos", doc);
-        if (doc){
-            res.status(200).json(doc);
-        } else {
-            res.status(404).json({message: 'no hay datos registrados con esa dni'});
-        }
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({error: err})
-    });
-});
-*/
 
 //Update de un alumno en especifico
 router.patch('/:alumnoId', checkAuth, (req, res, next) => {

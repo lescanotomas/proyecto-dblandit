@@ -1,3 +1,4 @@
+//Se crea el modelo alumno, para preparar a la base de datos con los datos que tiene que recibir
 const mongoose = require('mongoose');
 
 const alumnoSchema = mongoose.Schema({

@@ -1,3 +1,5 @@
+//Almacena el JWT en nodemon.js, que es donde se encuentra el env.JWT_KEY
+
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {

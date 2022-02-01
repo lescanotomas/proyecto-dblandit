@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 
+//POST en Registro, acá se puede registar un nuevo usuario
+
 router.post("/registro", (req, res, next) => {
   User.find({ email: req.body.email })
     .exec()
@@ -45,6 +47,9 @@ router.post("/registro", (req, res, next) => {
       }
     });
 });
+
+
+//POST en login, para loguearse.
 
 router.post('/login', (req, res, next) => {
   User.find({ email: req.body.email})
@@ -88,6 +93,8 @@ router.post('/login', (req, res, next) => {
      });
    });
 });
+
+//Eliminar un usuario en especifico
 
 router.delete("/:usuarioId", (req, res, next) => {
   User.deleteOne({ _id: req.params.usuarioId })
